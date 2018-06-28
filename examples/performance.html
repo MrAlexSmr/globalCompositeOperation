@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>DEMO</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+</head>
+<body>
+	<button>start</button>
+	<br>
+	<canvas width=1024 height=1024></canvas>
+	
+	<script src="../globalCompositeOperation.js"></script>
+	<script>
+		var i, j, token;
+		var dest = new ImageData(1024, 1024);
+		var imgDatas = [
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024),
+			new ImageData(1024, 1024)
+		];
+		var canvas = document.querySelector("CANVAS");
+		var ctx = canvas.getContext("2d");
+		var opertaion = globalCompositeOperation(false)["hue"];
+
+		// Pre-fill by random noise:
+		for (i = 0; i < imgDatas.length; ++i){
+			token = imgDatas[i].data;
+			for (j = 0; j < 1024 * 1024 * 4; j += 4){
+				token[j + 0] = Math.random() * 256;
+				token[j + 1] = Math.random() * 256;
+				token[j + 2] = Math.random() * 256;
+				token[j + 3] = Math.random() * 256;
+			}
+		}
+
+		document.querySelector("BUTTON").onclick = function() {
+            for (i = 0; i < imgDatas.length; ++i) {
+                opertaion(dest.data, imgDatas[i].data, 0, 0, 1024 * 1024);
+            }
+
+            ctx.putImageData(dest, 0, 0);
+        }
+	</script>
+</body>
+</html>

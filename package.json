@@ -1,0 +1,15 @@
+{
+  "name": "globalcompositeoperation",
+  "version": "1.0.0",
+  "license": "MIT License",
+  "main": "globalCompositeOperation.js",
+  "scripts": {
+    "build": "./node_modules/.bin/gulp build"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cache": "^0.3.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.4.0"
+  }
+}
